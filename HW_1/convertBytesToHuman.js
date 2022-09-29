@@ -13,5 +13,26 @@
  */
 
 export default function convertBytesToHuman(bytes) {
-  // your solution goes here
+	if (typeof(bytes) !== "number") return false;
+    if (isNaN(bytes)) return false;
+
+    if (bytes < 0) return false;
+
+    if (bytes < 1024) {
+        return String(bytes)+ " B";
+    }
+    if (bytes < 1024*1024) {
+        if (bytes % 1024 === 0) {
+            bytes = String(bytes / 1024)
+        } else {
+            bytes = (bytes / 1024).toFixed(2)
+        }
+        return bytes + " KB";
+    }
+    if (bytes % (1024*1024) === 0) {
+        bytes = String(bytes / 1024 / 1024)
+    } else {
+        bytes = (bytes / 1024 / 1024).toFixed(2)
+    }
+    return bytes + " MB";   
 }
